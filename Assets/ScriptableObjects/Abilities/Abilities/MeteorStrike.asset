@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-4981808532380791836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff0f6c57db24015479f2c8a30877df3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetSelf: 0
+  baseDamage: 100
+  accuracy: 1
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63d89649c4d562f41b64dc2e87177da0, type: 3}
+  m_Name: MeteorStrike
+  m_EditorClassIdentifier: 
+  abilityName: Meteor Strike
+  description: Summons a powerful meteor but weakens the caster
+  components:
+  - {fileID: -4981808532380791836}
+  - {fileID: 2909999906622708505}
+  uses: 0
+  requiresTarget: 1
+  totalDamage: 0
+  type: 0
+--- !u!114 &2909999906622708505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd0638a4b5e5ef4488ed712eb3e528e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetSelf: 1
+  stat: 2
+  baseAmount: 15

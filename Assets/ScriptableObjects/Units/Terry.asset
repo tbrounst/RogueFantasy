@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a00d0c53dfcc70498f96293eb60c80d, type: 3}
+  m_Name: Terry
+  m_EditorClassIdentifier: 
+  nameOfUnit: Terry
+  image: {fileID: 21300000, guid: 630763ec87408ea40969e845bcf56416, type: 3}
+  stats: 140000001400000014000000140000001400000014000000
+  randomStats: 405
+  potentialAbilities:
+  - {fileID: 11400000, guid: a639f0a544f32c946ac00837e08fa6b0, type: 2}
+  - {fileID: 11400000, guid: e969c78b6c9c7554d97fe2644f266b25, type: 2}
+  - {fileID: 11400000, guid: 4d9375a535933404ba856c8b68a7854b, type: 2}
+  - {fileID: 11400000, guid: 2cfa4edb30e4f4a41bcdbbbc4e9736d3, type: 2}
+  - {fileID: 11400000, guid: f65963b53d36fc44cad6bc1897ad2010, type: 2}
+  - {fileID: 11400000, guid: 7f79961b0c29ad949a3f2b353e971701, type: 2}
+  - {fileID: 11400000, guid: 09402c40049b9d54f8606b8a0aab3fa9, type: 2}
+  - {fileID: 11400000, guid: fe5ece4f0eff37545bb02778acefbf0c, type: 2}
+  - {fileID: 11400000, guid: e2e5afe27d470ca48b7acac9ff47d383, type: 2}
+  - {fileID: 11400000, guid: 9ecb709a787e42e49bde524fcf6ce3a5, type: 2}
+  - {fileID: 11400000, guid: 845f21ac36a26754ea1cf2994465d9f9, type: 2}
+  - {fileID: 11400000, guid: 9f3472127c9f36d428de15d8b05bb1d2, type: 2}
+  - {fileID: 11400000, guid: 2a6fc6f8363caa44abdf76115d20582a, type: 2}
+  - {fileID: 11400000, guid: 59baf5bbf4cb8be48bc16ec0b8b25f7b, type: 2}
+  - {fileID: 11400000, guid: f33789f0d5e9dad49a377175a10aa394, type: 2}
+  - {fileID: 11400000, guid: b6ebb6c5cd26b824491f40d170d2dd28, type: 2}
+  - {fileID: 11400000, guid: 7e84895b48753724991d2dfe2a40a041, type: 2}
+  - {fileID: 11400000, guid: 43aa82b524790ab49868dd84cf540feb, type: 2}
+  - {fileID: 11400000, guid: 6e0ae0d18ae128941bd0ac8e673a844e, type: 2}

@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7427880030570312749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9523da25c7bbd041ac26764f0a56329, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetSelf: 1
+  stat: 2
+  baseAmount: 10
+--- !u!114 &-5962988124722352682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff0f6c57db24015479f2c8a30877df3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetSelf: 0
+  baseDamage: 10
+  accuracy: 1
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63d89649c4d562f41b64dc2e87177da0, type: 3}
+  m_Name: BoostAll
+  m_EditorClassIdentifier: 
+  abilityName: Boost All
+  description: Gives a small boost to all stats
+  components:
+  - {fileID: 2301092000095782991}
+  - {fileID: -7427880030570312749}
+  - {fileID: 4347511412158146707}
+  uses: 0
+  requiresTarget: 0
+--- !u!114 &2301092000095782991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9523da25c7bbd041ac26764f0a56329, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetSelf: 1
+  stat: 1
+  baseAmount: 10
+--- !u!114 &4347511412158146707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9523da25c7bbd041ac26764f0a56329, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetSelf: 1
+  stat: 5
+  baseAmount: 10

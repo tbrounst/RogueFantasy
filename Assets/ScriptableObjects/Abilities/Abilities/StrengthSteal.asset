@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63d89649c4d562f41b64dc2e87177da0, type: 3}
+  m_Name: StrengthSteal
+  m_EditorClassIdentifier: 
+  abilityName: Strength Steal
+  description: Steals a foes strength
+  components:
+  - {fileID: 5384633075956457647}
+  - {fileID: 3817442081010692553}
+  uses: 0
+  requiresTarget: 1
+  totalDamage: 0
+  type: 0
+--- !u!114 &3817442081010692553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9523da25c7bbd041ac26764f0a56329, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetSelf: 1
+  stat: 1
+  baseAmount: 15
+--- !u!114 &5384633075956457647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd0638a4b5e5ef4488ed712eb3e528e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetSelf: 0
+  stat: 1
+  baseAmount: 15
