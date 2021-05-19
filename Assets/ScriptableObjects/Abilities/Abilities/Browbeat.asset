@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-1526110487529714256
+--- !u!114 &-5774973976048937686
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4c0198402ade3b4eaad616e96c16f55, type: 3}
-  m_Name: 
+  m_Script: {fileID: 11500000, guid: dd0638a4b5e5ef4488ed712eb3e528e8, type: 3}
+  m_Name: Browbeat1
   m_EditorClassIdentifier: 
   targetSelf: 0
-  baseDamage: 35
-  accuracy: 1
+  stat: 3
+  baseAmount: 15
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25,18 +25,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 63d89649c4d562f41b64dc2e87177da0, type: 3}
-  m_Name: DoubleSlash
+  m_Name: Browbeat
   m_EditorClassIdentifier: 
-  abilityName: Double Slash
-  description: Slash twice
+  abilityName: Browbeat
+  description: Harm an enemy and lower their magic attack
   uses: 0
   components:
-  - {fileID: 1176537613766324716}
-  - {fileID: -1526110487529714256}
-  requiresTarget: 1
-  totalDamage: 70
-  type: 0
---- !u!114 &1176537613766324716
+  - {fileID: 3101278081489021887}
+  - {fileID: -5774973976048937686}
+  requiresTarget: 0
+  totalDamage: 0
+  type: 2
+--- !u!114 &3101278081489021887
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4c0198402ade3b4eaad616e96c16f55, type: 3}
-  m_Name: 
+  m_Name: Browbeat0
   m_EditorClassIdentifier: 
   targetSelf: 0
-  baseDamage: 35
+  baseDamage: 75
   accuracy: 1

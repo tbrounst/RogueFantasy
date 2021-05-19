@@ -3,14 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 
-public enum BattleState { START, PLAYERTURN, ENEMYTURN, ACTING, BETWEEN, WIN, LOSE }
-public class BattleSystem : MonoBehaviour
+//public enum BattleState { START, PLAYERTURN, ENEMYTURN, ACTING, BETWEEN, WIN, LOSE }
+public class BattleSystem : StateMachine
 {
-    public BattleState state;
-    private BattleTimer battleTimer;
+    //public BattleState state;
+    [HideInInspector]
+    public BattleTimer battleTimer;
 
     public AllPossibleUnits aus;
 
@@ -23,21 +25,56 @@ public class BattleSystem : MonoBehaviour
     public Unit activeUnit;
     private Ability queuedAttack;
 
-    public GUILayer guiLayer;
+    //public GUILayer guiLayer;
 
-    private int round = 0;
+    private int round = 1;
+    private int playerLevels = -1;
+    private int enemyLevels = -1;
+
+    //Events
+
+    [SerializeField] UpdateGameDescriptionEvent UpdateGameDescriptionEvent;
+    [SerializeField] public UnityEvent StartBattleEvent;
+    [SerializeField] UnityEvent StartPlayerTurnEvent;
+    [SerializeField] AttackEvent AttackEvent;
+    [SerializeField] ToolTipEvent ToolTipEvent;
+    [SerializeField] BattleLossEvent BattleLossEvent;
+    [SerializeField] UnityEvent UpdateStatBlockEvent;
 
     //Unity functions
 
-    private void Start()
+    public void Start()
     {
-        if (guiLayer.attackButtons.Count != 4)
-        {
-            Debug.Log("Buttons not synced correctly");
-            return;
-        }
+        //if (guiLayer.attackButtons.Count != 4)
+        //{
+        //    Debug.Log("Buttons not synced correctly");
+        //    return;
+        //}
         InitializeParty(aus.allPlayerUnits, playerParty);
         
+        if(playerLevels == -1)
+        {
+            playerLevels = playerParty.GetPartyMemeber(0).level;
+        } else
+        {
+            foreach (Unit unit in playerParty.partyMembers)
+            {
+                unit.level = playerLevels;
+            }
+        }
+
+        if (enemyLevels == -1)
+        {
+            enemyLevels = enemyParty.GetPartyMemeber(0).level;
+        }
+        else
+        {
+            foreach (Unit unit in enemyParty.partyMembers)
+            {
+                unit.level = enemyLevels;
+            }
+        }
+
         StartNewRound();
     }
 
@@ -67,10 +104,18 @@ public class BattleSystem : MonoBehaviour
             } else
             {
                 state = BattleState.PLAYERTURN;
-                guiLayer.EnableAttackButtons(true);
-                guiLayer.UpdateGameDescriptionWithoutTyping("Select an attack");
+                StartPlayerTurnEvent.Invoke();
+                //guiLayer.EnableAttackButtons(true);
+                //guiLayer.UpdateGameDescriptionWithoutTyping("Select an attack");
             }
         }
+    }
+
+    //Getters
+
+    public int GetRound()
+    {
+        return round;
     }
 
     //Setup game
@@ -93,18 +138,21 @@ public class BattleSystem : MonoBehaviour
             unit.level++;
         }
 
-        InitializeParty(aus.allEnemyUnits, enemyParty);
+        InitializeParty(aus.allPlayerUnits, enemyParty);
 
         activeUnit = playerParty.GetPartyMemeber(0);
         battleTimer = new BattleTimer(combatants);
 
-        guiLayer.SetUp(combatants);
+        StartBattleEvent.Invoke();
+        //guiLayer.SetUp(combatants);
+        //guiLayer.SetRoundText(round);
+        //guiLayer.ToggleResetButton(false);
         UpdateStatBlocks();
 
         state = BattleState.BETWEEN;
     }
 
-    private void InitializeParty(List<UnitBase> allPossibleUnits, Party party)
+    public void InitializeParty(List<UnitBase> allPossibleUnits, Party party)
     {
         List<UnitBase> allPossibleUnitsCopy = new List<UnitBase>(allPossibleUnits);
         foreach (Unit unit in party.partyMembers)
@@ -122,7 +170,8 @@ public class BattleSystem : MonoBehaviour
     {
         Ability ability = activeUnit.currentAbilities[attackNum];
         string toolTipText = ability.GenerateToolTipText();
-        guiLayer.CreateAttackToolTip(toolTipText);
+        ToolTipEvent.Invoke(toolTipText);
+        //guiLayer.CreateAttackToolTip(toolTipText);
     }
 
     public void QueueAttack(int attackNum)
@@ -138,10 +187,11 @@ public class BattleSystem : MonoBehaviour
 
         if (queuedAttack.requiresTarget)
         {
-            guiLayer.UpdateGameDescriptionWithoutTyping("Select a target");
+            UpdateGameDescriptionEvent.Invoke("Select a target");
+            //guiLayer.UpdateGameDescriptionWithoutTyping("Select a target");
         } else
         {
-            StartCoroutine(PerformAttack(queuedAttack, activeUnit, null));
+            PerformAttack(queuedAttack, activeUnit, null);
         }
         
     }
@@ -152,7 +202,7 @@ public class BattleSystem : MonoBehaviour
         {
             return;
         }
-        StartCoroutine(PerformAttack(queuedAttack, activeUnit, target));
+        PerformAttack(queuedAttack, activeUnit, target);
     }
 
     public void EnemyAttack()
@@ -171,35 +221,41 @@ public class BattleSystem : MonoBehaviour
             }
         }
 
-        StartCoroutine(PerformAttack(moveToUse, activeUnit, playerParty.GetPartyMemeber(enemyTarget)));
+        PerformAttack(moveToUse, activeUnit, playerParty.GetPartyMemeber(enemyTarget));
     }
 
-    public IEnumerator PerformAttack(Ability attack, Unit caster, Unit target)
+    public void PerformAttack(Ability attack, Unit caster, Unit target)
     {
-        guiLayer.HideToolTip();
-        guiLayer.EnableAttackButtons(false);
+        //guiLayer.HideToolTip();
+        //guiLayer.EnableAttackButtons(false);
         queuedAttack = null;
         Debug.Log(attack.abilityName);
         List<string> attackOutputs = attack.UseAbility(caster, target);
-        yield return StartCoroutine(AnimateAttack(attack, attackOutputs, caster, target));
-        state = BattleState.BETWEEN;
+        AttackEvent.Invoke(attack, attackOutputs, caster, target);
+        //while(outstandingActions.Count > 0)
+        //{
+        //    Debug.Log("I am dying here");
+        //}
+        
+        //yield return StartCoroutine(AnimateAttack(attack, attackOutputs, caster, target));
+        //state = BattleState.BETWEEN;
     }
 
-    public IEnumerator AnimateAttack(Ability attack, List<string> attackOutputs, Unit caster, Unit target) 
-    {
-        yield return guiLayer.UnitAttackAnimation(caster);
-        yield return new WaitForSeconds(.4f);
-        if (attack.requiresTarget)
-        {
-            yield return guiLayer.UnitDamageAnimation(target);
-        }
-        yield return guiLayer.UpdateUIFromAbility(attackOutputs);
+    //public IEnumerator AnimateAttack(Ability attack, List<string> attackOutputs, Unit caster, Unit target) 
+    //{
+    //    yield return guiLayer.UnitAttackAnimation(caster);
+    //    yield return new WaitForSeconds(.4f);
+    //    if (attack.requiresTarget)
+    //    {
+    //        yield return guiLayer.UnitDamageAnimation(target);
+    //    }
+    //    yield return guiLayer.UpdateUIFromAbility(attackOutputs);
 
-        if (target != null && target.IsDead())
-        {
-            yield return guiLayer.UnitDeathAnimation(target);
-        }  
-    }
+    //    if (target != null && target.IsDead())
+    //    {
+    //        yield return guiLayer.UnitDeathAnimation(target);
+    //    }  
+    //}
 
     private void EndBattle()
     {
@@ -218,18 +274,53 @@ public class BattleSystem : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         round++;
-        guiLayer.UpdateGameDescriptionWithoutTyping($"Now for round {round}.");
+        UpdateGameDescriptionEvent.Invoke($"Now for round {round}.");
+        //guiLayer.UpdateGameDescriptionWithoutTyping($"Now for round {round}.");
         StartNewRound();
     }
 
     private IEnumerator PlayerLose()
     {
         yield return new WaitForSeconds(1f);
-        guiLayer.UpdateGameDescriptionWithoutTyping($"You made it to round {round}.");
+        BattleLossEvent.Invoke($"You made it to round {round}.");
+        //guiLayer.UpdateGameDescriptionWithoutTyping($"You made it to round {round}.");
+        //guiLayer.ToggleResetButton(true);
     }
 
     public void UpdateStatBlocks()
     {
-        guiLayer.UpdateUI();
+        UpdateStatBlockEvent.Invoke();
+        //guiLayer.UpdateUI();
     }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
+}
+
+
+//Event subclasses
+[System.Serializable]
+public class AttackEvent : UnityEvent<Ability, List<string>, Unit, Unit>
+{
+
+}
+
+[System.Serializable]
+public class BattleLossEvent : UnityEvent<string>
+{
+
+}
+
+[System.Serializable]
+public class UpdateGameDescriptionEvent : UnityEvent<string>
+{
+
+}
+
+[System.Serializable]
+public class ToolTipEvent : UnityEvent<string>
+{
+
 }

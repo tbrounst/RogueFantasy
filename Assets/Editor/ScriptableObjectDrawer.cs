@@ -28,7 +28,11 @@ public class ScriptableObjectDrawer : PropertyDrawer
             // Draw object properties
             if (!editor)
                 Editor.CreateCachedEditor(property.objectReferenceValue, null, ref editor);
-            editor.OnInspectorGUI();
+            if(editor != null)
+            {
+                EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
+                editor.OnInspectorGUI();
+            }
 
             // Set indent back to what it was
             EditorGUI.indentLevel--;

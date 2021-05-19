@@ -1,5 +1,20 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5588815498655004194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9523da25c7bbd041ac26764f0a56329, type: 3}
+  m_Name: MagicWall0
+  m_EditorClassIdentifier: 
+  targetSelf: 1
+  stat: 4
+  baseAmount: 10
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10,17 +25,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 63d89649c4d562f41b64dc2e87177da0, type: 3}
-  m_Name: MajorStrength
+  m_Name: MagicWall
   m_EditorClassIdentifier: 
-  abilityName: Major Strength
-  description: Powers up this unit a lot
+  abilityName: Magic Wall
+  description: Raise target and self's magic defense (target can be self)
   uses: 0
   components:
-  - {fileID: 5697925572698373355}
-  requiresTarget: 0
+  - {fileID: -5588815498655004194}
+  - {fileID: 5403146837615254986}
+  requiresTarget: 1
   totalDamage: 0
   type: 2
---- !u!114 &5697925572698373355
+--- !u!114 &5403146837615254986
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -30,8 +46,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a9523da25c7bbd041ac26764f0a56329, type: 3}
-  m_Name: 
+  m_Name: MagicWall1
   m_EditorClassIdentifier: 
-  targetSelf: 1
-  stat: 1
-  baseAmount: 25
+  targetSelf: 0
+  stat: 4
+  baseAmount: 10

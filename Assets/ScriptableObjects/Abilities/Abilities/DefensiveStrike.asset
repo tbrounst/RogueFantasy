@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetSelf: 0
-  baseDamage: 25
+  baseDamage: 30
   accuracy: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -29,11 +29,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Defensive Strike
   description: A light hit, but boosts defense
+  uses: 0
   components:
   - {fileID: -2340915915762937327}
   - {fileID: 7698950548447564574}
-  uses: 0
   requiresTarget: 1
+  totalDamage: 30
+  type: 0
 --- !u!114 &7698950548447564574
 MonoBehaviour:
   m_ObjectHideFlags: 0

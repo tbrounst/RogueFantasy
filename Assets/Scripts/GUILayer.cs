@@ -8,10 +8,11 @@ using DG.Tweening;
 public class GUILayer : MonoBehaviour
 {
     [SerializeField] int lettersPerSecond;
-    public BattleSystem bs;
+    public BattleSystem battleSystem;
 
     public Text turnMarker;
     public Text gameDescription;
+    public Text roundText;
 
     public AttackToolTip att;
 
@@ -20,11 +21,13 @@ public class GUILayer : MonoBehaviour
     public List<Text> unitStatBlocks = new List<Text>();
 
     public List<Button> attackButtons;
+    public Button resetButton;
     //public GameObject attackDescriptionPanel;
     
 
-    public void SetUp(List<Unit> combatants)
+    public void SetUp()
     {
+        List<Unit> combatants = battleSystem.combatants;
         for (int ii = 0; ii < combatants.Count; ii++)
         {
             GameObject obj = unitPanels[ii];
@@ -40,6 +43,30 @@ public class GUILayer : MonoBehaviour
         }
     }
 
+    public void AnimateAttackListener(Ability attack, List<string> attackOutputs, Unit caster, Unit target)
+    {
+        StartCoroutine(AnimateAttack(attack, attackOutputs, caster, target));
+    }
+
+    private IEnumerator AnimateAttack(Ability attack, List<string> attackOutputs, Unit caster, Unit target)
+    {
+        HideToolTip();
+        EnableAttackButtons(false);
+        yield return UnitAttackAnimation(caster);
+        yield return new WaitForSeconds(.4f);
+        if (attack.requiresTarget)
+        {
+            yield return UnitDamageAnimation(target);
+        }
+        yield return UpdateUIFromAbility(attackOutputs);
+
+        if (target != null && target.IsDead())
+        {
+            yield return UnitDeathAnimation(target);
+        }
+        //battleSystem.state = BattleState.BETWEEN;
+    }
+
     public IEnumerator TypeDialog(string textToUse, Text textField)
     {
         textField.text = "";
@@ -53,11 +80,11 @@ public class GUILayer : MonoBehaviour
 
     public IEnumerator UnitAttackAnimation(Unit unit)
     {
-        int unitIndex = bs.combatants.IndexOf(unit);
+        int unitIndex = battleSystem.combatants.IndexOf(unit);
         GameObject button = unitPanels[unitIndex].transform.GetChild(1).gameObject;
 
         var sequence = DOTween.Sequence();
-        if (bs.playerParty.InParty(unit))
+        if (battleSystem.playerParty.InParty(unit))
         {
             sequence.Append(button.transform.DOLocalMoveX(button.transform.localPosition.x + 50f, .2f));
         } else
@@ -70,7 +97,7 @@ public class GUILayer : MonoBehaviour
 
     public IEnumerator UnitDamageAnimation(Unit unit)
     {
-        int unitIndex = bs.combatants.IndexOf(unit);
+        int unitIndex = battleSystem.combatants.IndexOf(unit);
         GameObject button = unitPanels[unitIndex].transform.GetChild(1).gameObject;
         Image image = button.GetComponent<Image>();
         Color originalColor = image.color;
@@ -83,7 +110,7 @@ public class GUILayer : MonoBehaviour
 
     public IEnumerator UnitDeathAnimation(Unit unit)
     {
-        int unitIndex = bs.combatants.IndexOf(unit);
+        int unitIndex = battleSystem.combatants.IndexOf(unit);
         GameObject button = unitPanels[unitIndex].transform.GetChild(1).gameObject;
 
         yield return button.GetComponent<Image>().DOFade(0f, 0.55f).WaitForCompletion();
@@ -106,28 +133,28 @@ public class GUILayer : MonoBehaviour
 
     public void UpdateUI()
     {
-        if (bs.state == BattleState.WIN)
+        if (battleSystem.state == BattleState.WIN)
         {
             Debug.Log("You won");
             gameDescription.text = "A winner is you!";
             return;
         }
-        else if (bs.state == BattleState.LOSE)
+        else if (battleSystem.state == BattleState.LOSE)
         {
             gameDescription.text = "You lost";
             return;
         }
 
-        UpdateAllStatBlocks(bs.combatants, unitStatBlocks);
+        UpdateAllStatBlocks(battleSystem.combatants, unitStatBlocks);
 
         for (int ii = 0; ii < attackButtons.Count; ii++)
         {
             Button attackButton = attackButtons[ii];
-            attackButton.GetComponentInChildren<Text>().text = bs.activeUnit.currentAbilities[ii].abilityName;
-            attackButton.gameObject.SetActive(bs.state == BattleState.PLAYERTURN);
+            attackButton.GetComponentInChildren<Text>().text = battleSystem.activeUnit.currentAbilities[ii].abilityName;
+            attackButton.gameObject.SetActive(battleSystem.state == BattleState.PLAYERTURN);
         }
 
-        turnMarker.text = $"Active turn is: {bs.activeUnit.GetName()}";
+        turnMarker.text = $"Active turn is: {battleSystem.activeUnit.GetName()}";
     }
 
     private void UpdateAllStatBlocks(List<Unit> combatants, List<Text> statblock)
@@ -171,5 +198,16 @@ public class GUILayer : MonoBehaviour
     public void HideToolTip()
     {
         att.HideToolTip();
+    }
+
+    public void SetRoundText()
+    {
+        int round = battleSystem.GetRound();
+        roundText.text = $"Round: {round}";
+    }
+
+    public void ToggleResetButton(bool toggle)
+    {
+        resetButton.gameObject.SetActive(toggle);
     }
 }

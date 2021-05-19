@@ -14,39 +14,33 @@ public class AbilityEditor : Editor
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
+        EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
 
         if (GUILayout.Button("Add Reg Attack"))
         {
-            ability.components.Add(null);
-            int index = ability.components.Count - 1;
-            ability.components[index] = CreateInstance<RegAttackComponent>();
-            AssetDatabase.AddObjectToAsset(ability.components[index], ability);
-            AssetDatabase.ImportAsset(AssetDatabase.GetAssetPath(index));
+            CreateComponenet(CreateInstance<RegAttackComponent>());
         }
         if (GUILayout.Button("Add Magic Attack"))
         {
-            ability.components.Add(null);
-            int index = ability.components.Count - 1;
-            ability.components[index] = CreateInstance<MAttackComponent>();
-            AssetDatabase.AddObjectToAsset(ability.components[index], ability);
-            AssetDatabase.ImportAsset(AssetDatabase.GetAssetPath(index));
+            CreateComponenet(CreateInstance<MAttackComponent>());
         }
         if (GUILayout.Button("Add Buff"))
         {
-            ability.components.Add(null);
-            int index = ability.components.Count - 1;
-            ability.components[index] = CreateInstance<RegBuffComponent>();
-            AssetDatabase.AddObjectToAsset(ability.components[index], ability);
-            AssetDatabase.ImportAsset(AssetDatabase.GetAssetPath(index));
+            CreateComponenet(CreateInstance<RegBuffComponent>());
         }
         if (GUILayout.Button("Add Debuff"))
         {
-            ability.components.Add(null);
-            int index = ability.components.Count - 1;
-            ability.components[index] = CreateInstance<RegDebuffComponent>();
-            AssetDatabase.AddObjectToAsset(ability.components[index], ability);
-            AssetDatabase.ImportAsset(AssetDatabase.GetAssetPath(index));
+            CreateComponenet(CreateInstance<RegDebuffComponent>());
         }
+    }
+
+    private void CreateComponenet(AbilityComponent input)
+    {
+        int index = ability.components.Count;
+        ability.components.Add(input);
+        ability.components[index].name = ability.name + index.ToString();
+        AssetDatabase.AddObjectToAsset(ability.components[index], ability);
+        AssetDatabase.ImportAsset(AssetDatabase.GetAssetPath(ability));
     }
 
 }

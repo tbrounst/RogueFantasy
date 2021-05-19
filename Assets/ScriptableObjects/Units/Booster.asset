@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a00d0c53dfcc70498f96293eb60c80d, type: 3}
+  m_Name: Booster
+  m_EditorClassIdentifier: 
+  nameOfUnit: Booster
+  image: {fileID: 21300000, guid: 6269c02b0f513004888de7dcda8cea6f, type: 3}
+  stats: 140000000a000000190000000a0000001900000028000000
+  randomStats: 185
+  potentialAbilities:
+  - {fileID: 11400000, guid: a639f0a544f32c946ac00837e08fa6b0, type: 2}
+  - {fileID: 11400000, guid: 680ed7f70fb878b42a74a4f328f65a9f, type: 2}
+  - {fileID: 11400000, guid: a7c6aba4b25741048b66a7ecd0a647dd, type: 2}
+  - {fileID: 11400000, guid: 6bb8a54a5bf237548b598ec7a54f1a9a, type: 2}
+  - {fileID: 11400000, guid: 8ac5c4b4ec5e27b4e98e85dbab480f76, type: 2}
+  - {fileID: 11400000, guid: ca6ea1bf03d269943ae31e72aec3ae6d, type: 2}
+  - {fileID: 11400000, guid: e2e5afe27d470ca48b7acac9ff47d383, type: 2}
+  - {fileID: 11400000, guid: 9ecb709a787e42e49bde524fcf6ce3a5, type: 2}
+  - {fileID: 11400000, guid: 6a9460c6bcaccb242b90ebe02e412098, type: 2}
+  - {fileID: 11400000, guid: 495deeab873c39444a617568bb10a233, type: 2}
+  - {fileID: 11400000, guid: f65963b53d36fc44cad6bc1897ad2010, type: 2}
+  - {fileID: 11400000, guid: 8840453c536c2f24080ed6d324ae89e2, type: 2}
+  - {fileID: 11400000, guid: 845f21ac36a26754ea1cf2994465d9f9, type: 2}
+  - {fileID: 11400000, guid: 7e84895b48753724991d2dfe2a40a041, type: 2}
+  - {fileID: 11400000, guid: 2a6fc6f8363caa44abdf76115d20582a, type: 2}
+  - {fileID: 11400000, guid: 60bf48b5b5e0d124c82dfd3d89716460, type: 2}
+  - {fileID: 11400000, guid: 4d9375a535933404ba856c8b68a7854b, type: 2}
+  - {fileID: 11400000, guid: 9f3472127c9f36d428de15d8b05bb1d2, type: 2}
+  - {fileID: 11400000, guid: 2cfa4edb30e4f4a41bcdbbbc4e9736d3, type: 2}
+  - {fileID: 11400000, guid: 59baf5bbf4cb8be48bc16ec0b8b25f7b, type: 2}

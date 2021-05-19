@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetSelf: 0
-  baseDamage: 10
+  baseDamage: 35
   accuracy: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -29,9 +29,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Slash
   description: Basic slashing attack
+  uses: 2
   components:
   - {fileID: -486847505283140803}
-  uses: 2
   requiresTarget: 1
-  totalDamage: 0
+  totalDamage: 35
   type: 0

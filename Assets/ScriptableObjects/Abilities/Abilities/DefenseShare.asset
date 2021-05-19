@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-1526110487529714256
+--- !u!114 &-6921668290967117190
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9,12 +9,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4c0198402ade3b4eaad616e96c16f55, type: 3}
-  m_Name: 
+  m_Script: {fileID: 11500000, guid: a9523da25c7bbd041ac26764f0a56329, type: 3}
+  m_Name: DefenseShare1
   m_EditorClassIdentifier: 
   targetSelf: 0
-  baseDamage: 35
-  accuracy: 1
+  stat: 2
+  baseAmount: 10
+--- !u!114 &-6393294926434367082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9523da25c7bbd041ac26764f0a56329, type: 3}
+  m_Name: DefenseShare0
+  m_EditorClassIdentifier: 
+  targetSelf: 1
+  stat: 2
+  baseAmount: 10
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25,29 +40,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 63d89649c4d562f41b64dc2e87177da0, type: 3}
-  m_Name: DoubleSlash
+  m_Name: DefenseShare
   m_EditorClassIdentifier: 
-  abilityName: Double Slash
-  description: Slash twice
+  abilityName: Defense Share
+  description: Raise self and target's defense (self can also be target)
   uses: 0
   components:
-  - {fileID: 1176537613766324716}
-  - {fileID: -1526110487529714256}
+  - {fileID: -6393294926434367082}
+  - {fileID: -6921668290967117190}
   requiresTarget: 1
-  totalDamage: 70
-  type: 0
---- !u!114 &1176537613766324716
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4c0198402ade3b4eaad616e96c16f55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetSelf: 0
-  baseDamage: 35
-  accuracy: 1
+  totalDamage: 0
+  type: 2

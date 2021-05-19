@@ -29,10 +29,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Bash
   description: Bashes the opponent
+  uses: 2
   components:
   - {fileID: 8225718075789508736}
-  uses: 2
   requiresTarget: 1
+  totalDamage: 40
+  type: 0
 --- !u!114 &8225718075789508736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46,5 +48,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetSelf: 0
-  baseDamage: 15
+  baseDamage: 40
   accuracy: 1

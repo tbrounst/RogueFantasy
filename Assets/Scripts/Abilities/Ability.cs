@@ -10,8 +10,8 @@ public class Ability : ScriptableObject
 {
     public string abilityName = "New Ability";
     public string description = "An ability";
-    public List<AbilityComponent> components;
     public int uses;
+    public List<AbilityComponent> components = new List<AbilityComponent>();
     [HideInInspector]
     public bool requiresTarget;
     [HideInInspector]
@@ -82,6 +82,11 @@ public class Ability : ScriptableObject
         requiresTarget = false;
         totalDamage = 0;
         type = AbilityType.CONDITION;
+        if (components == null)
+        {
+            Debug.Log($"No components for {abilityName}");
+            return;
+        }
 
         foreach (AbilityComponent component in components)
         {

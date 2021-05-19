@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetSelf: 0
-  baseDamage: 25
+  baseDamage: 60
   accuracy: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -29,9 +29,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Heavy Punch
   description: Punches enemy really hard
+  uses: 0
   components:
   - {fileID: -8124943514825594472}
-  uses: 0
   requiresTarget: 1
-  totalDamage: 0
+  totalDamage: 60
   type: 0

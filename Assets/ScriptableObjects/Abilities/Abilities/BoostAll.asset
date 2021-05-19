@@ -44,12 +44,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Boost All
   description: Gives a small boost to all stats
+  uses: 0
   components:
   - {fileID: 2301092000095782991}
   - {fileID: -7427880030570312749}
   - {fileID: 4347511412158146707}
-  uses: 0
+  - {fileID: 2652624426846578663}
+  - {fileID: 6775468308707372996}
   requiresTarget: 0
+  totalDamage: 0
+  type: 2
 --- !u!114 &2301092000095782991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65,6 +69,21 @@ MonoBehaviour:
   targetSelf: 1
   stat: 1
   baseAmount: 10
+--- !u!114 &2652624426846578663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9523da25c7bbd041ac26764f0a56329, type: 3}
+  m_Name: BoostAll3
+  m_EditorClassIdentifier: 
+  targetSelf: 1
+  stat: 3
+  baseAmount: 10
 --- !u!114 &4347511412158146707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,4 +98,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetSelf: 1
   stat: 5
+  baseAmount: 10
+--- !u!114 &6775468308707372996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9523da25c7bbd041ac26764f0a56329, type: 3}
+  m_Name: BoostAll4
+  m_EditorClassIdentifier: 
+  targetSelf: 1
+  stat: 4
   baseAmount: 10

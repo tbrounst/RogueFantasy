@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a00d0c53dfcc70498f96293eb60c80d, type: 3}
+  m_Name: Wizard
+  m_EditorClassIdentifier: 
+  nameOfUnit: Wizard
+  image: {fileID: 21300000, guid: 34dd1213cc1e7e74dbe6210b9c031d96, type: 3}
+  stats: 230000000500000005000000280000002300000019000000
+  randomStats: 160
+  potentialAbilities:
+  - {fileID: 11400000, guid: 52a2c11a4d7ec954ab4e7fec210ea29e, type: 2}
+  - {fileID: 11400000, guid: 845f21ac36a26754ea1cf2994465d9f9, type: 2}
+  - {fileID: 11400000, guid: 7e84895b48753724991d2dfe2a40a041, type: 2}
+  - {fileID: 11400000, guid: c48d2d8a536cd404589280478274da3d, type: 2}
+  - {fileID: 11400000, guid: 2a6fc6f8363caa44abdf76115d20582a, type: 2}
+  - {fileID: 11400000, guid: c89d4040ccb6c6849a3d8a564be11c0a, type: 2}
+  - {fileID: 11400000, guid: f6aaf0ce09c7bc344ab1376a1ed74d11, type: 2}
+  - {fileID: 11400000, guid: 501c021df38afa24f8ee2235221679c5, type: 2}
+  - {fileID: 11400000, guid: 6e0ae0d18ae128941bd0ac8e673a844e, type: 2}
+  - {fileID: 11400000, guid: 43aa82b524790ab49868dd84cf540feb, type: 2}
+  - {fileID: 11400000, guid: e2c719f3b7d23404a901473a90659315, type: 2}
+  - {fileID: 11400000, guid: 5bcfbba1477076a47acc8e22fb4785c1, type: 2}
+  - {fileID: 11400000, guid: 60bf48b5b5e0d124c82dfd3d89716460, type: 2}
+  - {fileID: 11400000, guid: 495deeab873c39444a617568bb10a233, type: 2}
+  - {fileID: 11400000, guid: de31959f1ada46b4aaf05a46d556fc63, type: 2}
+  - {fileID: 11400000, guid: 4e2399c9fe0084f49a1bba0567403274, type: 2}
+  - {fileID: 11400000, guid: 6a9460c6bcaccb242b90ebe02e412098, type: 2}
+  - {fileID: 11400000, guid: 9ecb709a787e42e49bde524fcf6ce3a5, type: 2}
+  - {fileID: 11400000, guid: 87dfc605ef92b8b448c629830e7a237a, type: 2}
+  - {fileID: 11400000, guid: b6ebb6c5cd26b824491f40d170d2dd28, type: 2}

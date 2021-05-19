@@ -34,6 +34,8 @@ MonoBehaviour:
   - {fileID: 485615081686139025}
   uses: 0
   requiresTarget: 1
+  totalDamage: 90
+  type: 0
 --- !u!114 &485615081686139025
 MonoBehaviour:
   m_ObjectHideFlags: 0
