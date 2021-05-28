@@ -23,19 +23,22 @@ public class BattleSystem : StateMachine
     public List<Unit> combatants;
 
     public Unit activeUnit;
-    private Ability queuedAttack;
+    public Ability queuedAttack;
 
     //public GUILayer guiLayer;
 
-    private int round = 1;
-    private int playerLevels = -1;
-    private int enemyLevels = -1;
+    [HideInInspector]
+    public int round = 1;
+    [HideInInspector]
+    public int playerLevels = -1;
+    [HideInInspector]
+    public int enemyLevels = -1;
 
     //Events
 
-    [SerializeField] UpdateGameDescriptionEvent UpdateGameDescriptionEvent;
+    [SerializeField] public UpdateGameDescriptionEvent UpdateGameDescriptionEvent;
     [SerializeField] public UnityEvent StartBattleEvent;
-    [SerializeField] UnityEvent StartPlayerTurnEvent;
+    [SerializeField] public UnityEvent StartPlayerTurnEvent;
     [SerializeField] AttackEvent AttackEvent;
     [SerializeField] ToolTipEvent ToolTipEvent;
     [SerializeField] BattleLossEvent BattleLossEvent;
@@ -80,35 +83,35 @@ public class BattleSystem : StateMachine
 
     private void Update()
     {
-        if (state == BattleState.BETWEEN)
-        {
-            if (playerParty.IsPartyDefeated())
-            {
-                state = BattleState.LOSE;
-                EndBattle();
-                return;
-            }
-            if (enemyParty.IsPartyDefeated())
-            {
-                Debug.Log("Enemy is dead");
-                state = BattleState.WIN;
-                EndBattle();
-                return;
-            }
+        //if (state == BattleState.BETWEEN)
+        //{
+        //    if (playerParty.IsPartyDefeated())
+        //    {
+        //        state = BattleState.LOSE;
+        //        EndBattle();
+        //        return;
+        //    }
+        //    if (enemyParty.IsPartyDefeated())
+        //    {
+        //        Debug.Log("Enemy is dead");
+        //        state = BattleState.WIN;
+        //        EndBattle();
+        //        return;
+        //    }
 
-            activeUnit = battleTimer.NextToGo();
-            UpdateStatBlocks();
-            if (enemyParty.InParty(activeUnit))
-            {
-                EnemyAttack();
-            } else
-            {
-                state = BattleState.PLAYERTURN;
-                StartPlayerTurnEvent.Invoke();
-                //guiLayer.EnableAttackButtons(true);
-                //guiLayer.UpdateGameDescriptionWithoutTyping("Select an attack");
-            }
-        }
+        //    activeUnit = battleTimer.NextToGo();
+        //    UpdateStatBlocks();
+        //    if (enemyParty.InParty(activeUnit))
+        //    {
+        //        EnemyAttack();
+        //    } else
+        //    {
+        //        state = BattleState.PLAYERTURN;
+        //        StartPlayerTurnEvent.Invoke();
+        //        //guiLayer.EnableAttackButtons(true);
+        //        //guiLayer.UpdateGameDescriptionWithoutTyping("Select an attack");
+        //    }
+        //}
     }
 
     //Getters
@@ -122,34 +125,35 @@ public class BattleSystem : StateMachine
 
     private void StartNewRound()
     {
-        state = BattleState.START;
+        //state = BattleState.START;
+        SetState(new BeginNewRoundState(this));
 
-        combatants = new List<Unit>();
-        combatants.AddRange(playerParty.partyMembers);
-        combatants.AddRange(enemyParty.partyMembers);
+        //combatants = new List<Unit>();
+        //combatants.AddRange(playerParty.partyMembers);
+        //combatants.AddRange(enemyParty.partyMembers);
 
-        foreach (Unit unit in playerParty.partyMembers)
-        {
-            unit.unitStats.ResetAllStats();
-        }
+        //foreach (Unit unit in playerParty.partyMembers)
+        //{
+        //    unit.unitStats.ResetAllStats();
+        //}
 
-        foreach (Unit unit in enemyParty.partyMembers)
-        {
-            unit.level++;
-        }
+        //foreach (Unit unit in enemyParty.partyMembers)
+        //{
+        //    unit.level++;
+        //}
 
-        InitializeParty(aus.allPlayerUnits, enemyParty);
+        //InitializeParty(aus.allPlayerUnits, enemyParty);
 
-        activeUnit = playerParty.GetPartyMemeber(0);
-        battleTimer = new BattleTimer(combatants);
+        //activeUnit = playerParty.GetPartyMemeber(0);
+        //battleTimer = new BattleTimer(combatants);
 
-        StartBattleEvent.Invoke();
-        //guiLayer.SetUp(combatants);
-        //guiLayer.SetRoundText(round);
-        //guiLayer.ToggleResetButton(false);
-        UpdateStatBlocks();
+        //StartBattleEvent.Invoke();
+        ////guiLayer.SetUp(combatants);
+        ////guiLayer.SetRoundText(round);
+        ////guiLayer.ToggleResetButton(false);
+        //UpdateStatBlocks();
 
-        state = BattleState.BETWEEN;
+        //state = BattleState.BETWEEN;
     }
 
     public void InitializeParty(List<UnitBase> allPossibleUnits, Party party)
@@ -176,52 +180,54 @@ public class BattleSystem : StateMachine
 
     public void QueueAttack(int attackNum)
     {
-        if (state != BattleState.PLAYERTURN)
-        {
-            Debug.Log("It's not your turn");
-            return;
-        }
+        //if (state != BattleState.PLAYERTURN)
+        //{
+        //    Debug.Log("It's not your turn");
+        //    return;
+        //}
 
-        state = BattleState.ACTING;
-        queuedAttack = activeUnit.currentAbilities[attackNum];
+        //state = BattleState.ACTING;
+        //queuedAttack = activeUnit.currentAbilities[attackNum];
 
-        if (queuedAttack.requiresTarget)
-        {
-            UpdateGameDescriptionEvent.Invoke("Select a target");
-            //guiLayer.UpdateGameDescriptionWithoutTyping("Select a target");
-        } else
-        {
-            PerformAttack(queuedAttack, activeUnit, null);
-        }
+        //if (queuedAttack.requiresTarget)
+        //{
+        //    UpdateGameDescriptionEvent.Invoke("Select a target");
+        //    //guiLayer.UpdateGameDescriptionWithoutTyping("Select a target");
+        //} else
+        //{
+        //    PerformAttack(queuedAttack, activeUnit, null);
+        //}
+        state.QueueAttack(attackNum);
         
     }
 
     public void PlayerAttack(Unit target)
     {
-        if (queuedAttack == null)
-        {
-            return;
-        }
-        PerformAttack(queuedAttack, activeUnit, target);
+        //if (queuedAttack == null)
+        //{
+        //    return;
+        //}
+        //PerformAttack(queuedAttack, activeUnit, target);
+        state.Target(target);
     }
 
     public void EnemyAttack()
     {
-        state = BattleState.ACTING;
-        int moveToUseInt = Random.Range(0, activeUnit.currentAbilities.Count);
-        Ability moveToUse = activeUnit.currentAbilities[moveToUseInt];
+        //state = BattleState.ACTING;
+        //int moveToUseInt = Random.Range(0, activeUnit.currentAbilities.Count);
+        //Ability moveToUse = activeUnit.currentAbilities[moveToUseInt];
 
-        int enemyTarget = 0;
-        if (moveToUse.requiresTarget)
-        {
-            enemyTarget = Random.Range(0, playerParty.PartySize());
-            while (playerParty.GetPartyMemeber(enemyTarget).IsDead())
-            {
-                enemyTarget = Random.Range(0, playerParty.PartySize());
-            }
-        }
+        //int enemyTarget = 0;
+        //if (moveToUse.requiresTarget)
+        //{
+        //    enemyTarget = Random.Range(0, playerParty.PartySize());
+        //    while (playerParty.GetPartyMemeber(enemyTarget).IsDead())
+        //    {
+        //        enemyTarget = Random.Range(0, playerParty.PartySize());
+        //    }
+        //}
 
-        PerformAttack(moveToUse, activeUnit, playerParty.GetPartyMemeber(enemyTarget));
+        //PerformAttack(moveToUse, activeUnit, playerParty.GetPartyMemeber(enemyTarget));
     }
 
     public void PerformAttack(Ability attack, Unit caster, Unit target)
@@ -259,18 +265,18 @@ public class BattleSystem : StateMachine
 
     private void EndBattle()
     {
-        UpdateStatBlocks();
-        if (state == BattleState.WIN)
-        {
-            StartCoroutine(PlayerWin());
-        }
-        if (state == BattleState.LOSE)
-        {
-            StartCoroutine(PlayerLose());
-        }
+        //UpdateStatBlocks();
+        //if (state == BattleState.WIN)
+        //{
+        //    StartCoroutine(PlayerWin());
+        //}
+        //if (state == BattleState.LOSE)
+        //{
+        //    StartCoroutine(PlayerLose());
+        //}
     }
 
-    private IEnumerator PlayerWin()
+    public IEnumerator PlayerWin()
     {
         yield return new WaitForSeconds(1f);
         round++;
@@ -279,7 +285,7 @@ public class BattleSystem : StateMachine
         StartNewRound();
     }
 
-    private IEnumerator PlayerLose()
+    public IEnumerator PlayerLose()
     {
         yield return new WaitForSeconds(1f);
         BattleLossEvent.Invoke($"You made it to round {round}.");

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 internal class EnemyAttackState : BattleStateClass
 {
@@ -6,7 +7,7 @@ internal class EnemyAttackState : BattleStateClass
     {
     }
 
-    public virtual IEnumerator Attack()
+    public override void Start()
     {
         int moveToUseInt = Random.Range(0, BattleSystem.activeUnit.currentAbilities.Count);
         Ability moveToUse = BattleSystem.activeUnit.currentAbilities[moveToUseInt];
@@ -22,6 +23,11 @@ internal class EnemyAttackState : BattleStateClass
         }
 
         BattleSystem.PerformAttack(moveToUse, BattleSystem.activeUnit, BattleSystem.playerParty.GetPartyMemeber(enemyTarget));
-        BattleSystem.SetState(new BetweenState(BattleSystem));
+        ChangeState();
+    }
+
+    public override void ChangeState()
+    {
+        BattleSystem.SetState(new AnimatingState(BattleSystem));
     }
 }

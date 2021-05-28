@@ -11,14 +11,26 @@ public abstract class BattleStateClass
         BattleSystem = battleSystem;
     }
 
-    public virtual IEnumerator Start()
+    public virtual void Start()
     {
-        yield break;
+        return;
     }
 
 
-    public virtual IEnumerator Attack()
+    public virtual void QueueAttack(int attackNum)
     {
-        yield break;
+        return;
     }
+
+    public virtual void Target(Unit target)
+    {
+        return;
+    }
+
+    public virtual void Reset()
+    {
+        return;
+    }
+
+    public abstract void ChangeState();
 }

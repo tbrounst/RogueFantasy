@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BeginState : BattleStateClass
+public class BeginNewRoundState : BattleStateClass
 {
-    public BeginState(BattleSystem battleSystem) : base(battleSystem)
+    public BeginNewRoundState(BattleSystem battleSystem) : base(battleSystem)
     {
 
     }
 
-    // Start is called before the first frame update
-    public override IEnumerator Start()
+    public override void Start()
     {
         BattleSystem.combatants = new List<Unit>();
         BattleSystem.combatants.AddRange(BattleSystem.playerParty.partyMembers);
@@ -37,12 +36,11 @@ public class BeginState : BattleStateClass
         //guiLayer.ToggleResetButton(false);
         BattleSystem.UpdateStatBlocks();
 
-        BattleSystem.SetState(new BetweenState(BattleSystem));
+        ChangeState();
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void ChangeState()
     {
-        
+        BattleSystem.SetState(new BetweenState(BattleSystem));
     }
 }

@@ -64,6 +64,7 @@ public class GUILayer : MonoBehaviour
         {
             yield return UnitDeathAnimation(target);
         }
+        battleSystem.ChangeState();
         //battleSystem.state = BattleState.BETWEEN;
     }
 
@@ -133,13 +134,15 @@ public class GUILayer : MonoBehaviour
 
     public void UpdateUI()
     {
-        if (battleSystem.state == BattleState.WIN)
+        //if (battleSystem.state == BattleState.WIN)
+        if (battleSystem.GetStateClass() == typeof(PlayerWinState))
         {
             Debug.Log("You won");
             gameDescription.text = "A winner is you!";
             return;
         }
-        else if (battleSystem.state == BattleState.LOSE)
+        //else if (battleSystem.state == BattleState.LOSE)
+        if (battleSystem.GetStateClass() == typeof(PlayerLoseState))
         {
             gameDescription.text = "You lost";
             return;
@@ -151,7 +154,8 @@ public class GUILayer : MonoBehaviour
         {
             Button attackButton = attackButtons[ii];
             attackButton.GetComponentInChildren<Text>().text = battleSystem.activeUnit.currentAbilities[ii].abilityName;
-            attackButton.gameObject.SetActive(battleSystem.state == BattleState.PLAYERTURN);
+            //attackButton.gameObject.SetActive(battleSystem.state == BattleState.PLAYERTURN);
+            attackButton.gameObject.SetActive(battleSystem.GetStateClass() == typeof(PlayerAttackState));
         }
 
         turnMarker.text = $"Active turn is: {battleSystem.activeUnit.GetName()}";
