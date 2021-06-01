@@ -6,12 +6,20 @@ using UnityEngine;
 public class Unit : MonoBehaviour
 {   
     public UnitBase baseUnit;
-    public UnitStats unitStats;
+    private UnitStats unitStats;
     public int level;
 
     public List<Ability> currentAbilities = new List<Ability>(4);
 
-    public void Initialize()
+    public void Initialize(List<UnitBase> possibleUnits, int level)
+    {
+        int index = Random.Range(0, possibleUnits.Count);
+        baseUnit = possibleUnits[index];
+        this.level = level;
+        InitializeStats();
+    }
+
+    public void InitializeStats()
     {
         List<float> randMods = new List<float>();
         float total = 0f;
@@ -60,6 +68,11 @@ public class Unit : MonoBehaviour
         return unitStats.GetStat(stat);
     }
 
+    public void ResetAllStats()
+    {
+        unitStats.ResetAllStats();
+    }
+
     public void LevelUp()
     {
         LevelUp(1);
@@ -92,5 +105,10 @@ public class Unit : MonoBehaviour
     public string ToString()
     {
         return baseUnit.nameOfUnit;
+    }
+
+    public string GetElaborateText()
+    {
+        return baseUnit.ToString();
     }
 }

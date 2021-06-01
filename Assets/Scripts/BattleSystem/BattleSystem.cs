@@ -42,6 +42,7 @@ public class BattleSystem : StateMachine
     [SerializeField] AttackEvent AttackEvent;
     [SerializeField] ToolTipEvent ToolTipEvent;
     [SerializeField] BattleLossEvent BattleLossEvent;
+    [SerializeField] ResetEvent ResetEvent;
     [SerializeField] UnityEvent UpdateStatBlockEvent;
 
     //Unity functions
@@ -53,32 +54,34 @@ public class BattleSystem : StateMachine
         //    Debug.Log("Buttons not synced correctly");
         //    return;
         //}
-        InitializeParty(aus.allPlayerUnits, playerParty);
-        
-        if(playerLevels == -1)
-        {
-            playerLevels = playerParty.GetPartyMemeber(0).level;
-        } else
-        {
-            foreach (Unit unit in playerParty.partyMembers)
-            {
-                unit.level = playerLevels;
-            }
-        }
+        //InitializeParty(aus.allPlayerUnits, playerParty);
 
-        if (enemyLevels == -1)
-        {
-            enemyLevels = enemyParty.GetPartyMemeber(0).level;
-        }
-        else
-        {
-            foreach (Unit unit in enemyParty.partyMembers)
-            {
-                unit.level = enemyLevels;
-            }
-        }
+        //if(playerLevels == -1)
+        //{
+        //    playerLevels = playerParty.GetPartyMemeber(0).level;
+        //} else
+        //{
+        //    foreach (Unit unit in playerParty.partyMembers)
+        //    {
+        //        unit.level = playerLevels;
+        //    }
+        //}
 
-        StartNewRound();
+        //if (enemyLevels == -1)
+        //{
+        //    enemyLevels = enemyParty.GetPartyMemeber(0).level;
+        //}
+        //else
+        //{
+        //    foreach (Unit unit in enemyParty.partyMembers)
+        //    {
+        //        unit.level = enemyLevels;
+        //    }
+        //}
+
+        //StartNewRound();
+
+        //SetState(new InitializeBattleState(this));
     }
 
     private void Update()
@@ -159,12 +162,13 @@ public class BattleSystem : StateMachine
     public void InitializeParty(List<UnitBase> allPossibleUnits, Party party)
     {
         List<UnitBase> allPossibleUnitsCopy = new List<UnitBase>(allPossibleUnits);
+        Utils.Shuffle<UnitBase>(allPossibleUnitsCopy);
+        int index = 0;
         foreach (Unit unit in party.partyMembers)
         {
-            int index = Random.Range(0, allPossibleUnitsCopy.Count);
             unit.baseUnit = allPossibleUnitsCopy[index];
-            allPossibleUnitsCopy.RemoveAt(index);
-            unit.Initialize();
+            index++;
+            unit.InitializeStats();
         }
     }
 
@@ -208,6 +212,7 @@ public class BattleSystem : StateMachine
         //    return;
         //}
         //PerformAttack(queuedAttack, activeUnit, target);
+        //Unit target = playerParty.partyMembers[index];
         state.Target(target);
     }
 
@@ -293,6 +298,11 @@ public class BattleSystem : StateMachine
         //guiLayer.ToggleResetButton(true);
     }
 
+    public void ThrowResetEvent()
+    {
+        ResetEvent.Invoke(round);
+    }
+
     public void UpdateStatBlocks()
     {
         UpdateStatBlockEvent.Invoke();
@@ -315,6 +325,12 @@ public class AttackEvent : UnityEvent<Ability, List<string>, Unit, Unit>
 
 [System.Serializable]
 public class BattleLossEvent : UnityEvent<string>
+{
+
+}
+
+[System.Serializable]
+public class ResetEvent : UnityEvent<int>
 {
 
 }

@@ -9,7 +9,7 @@ public abstract class StateMachine : MonoBehaviour
     public void SetState(BattleStateClass state)
     {
         this.state = state;
-        this.state.Start();
+        this.state.Begin();
     }
 
     public System.Type GetStateClass()

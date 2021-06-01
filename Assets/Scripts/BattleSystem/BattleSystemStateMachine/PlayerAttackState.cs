@@ -37,15 +37,12 @@ internal class PlayerAttackState : BattleStateClass
         {
             return;
         }
-        Debug.Log("Started a targeted attack");
         BattleSystem.PerformAttack(BattleSystem.queuedAttack, BattleSystem.activeUnit, target);
-        Debug.Log("Finished a targeted attack");
         //ChangeState();
     }
 
     public override void ChangeState()
     {
-        Debug.Log("Shifting to between state");
         BattleSystem.SetState(new BetweenState(BattleSystem));
     }
 }

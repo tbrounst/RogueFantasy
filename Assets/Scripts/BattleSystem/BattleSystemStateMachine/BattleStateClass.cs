@@ -11,7 +11,7 @@ public abstract class BattleStateClass
         BattleSystem = battleSystem;
     }
 
-    public virtual void Start()
+    public virtual void Begin()
     {
         return;
     }
@@ -23,11 +23,6 @@ public abstract class BattleStateClass
     }
 
     public virtual void Target(Unit target)
-    {
-        return;
-    }
-
-    public virtual void Reset()
     {
         return;
     }

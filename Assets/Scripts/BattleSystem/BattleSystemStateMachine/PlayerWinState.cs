@@ -7,10 +7,10 @@ internal class PlayerWinState : BattleStateClass
     {
     }
 
-    public override void Start()
+    public override void Begin()
     {
         BattleSystem.UpdateStatBlocks();
-        BattleSystem.StartCoroutine(BattleSystem.PlayerWin());
+        BattleSystem.StartCoroutine(ProcessVictory());
     }
 
     private IEnumerator ProcessVictory()

@@ -6,7 +6,7 @@ internal class PlayerLoseState : BattleStateClass
     {
     }
 
-    public override void Start()
+    public override void Begin()
     {
         BattleSystem.UpdateStatBlocks();
         BattleSystem.StartCoroutine(BattleSystem.PlayerLose());
@@ -15,10 +15,5 @@ internal class PlayerLoseState : BattleStateClass
     public override void ChangeState()
     {
         BattleSystem.SetState(new InitializeBattleState(BattleSystem));
-    }
-
-    public override void Reset()
-    {
-        BattleSystem.Start();
     }
 }

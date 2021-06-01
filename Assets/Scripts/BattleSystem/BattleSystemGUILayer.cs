@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
-public class GUILayer : MonoBehaviour
+public class BattleSystemGUILayer : MonoBehaviour
 {
     [SerializeField] int lettersPerSecond;
     public BattleSystem battleSystem;
@@ -22,13 +22,14 @@ public class GUILayer : MonoBehaviour
 
     public List<Button> attackButtons;
     public Button resetButton;
+    private Dictionary<Button, Unit> buttonToUnit;
     //public GameObject attackDescriptionPanel;
     
 
     public void SetUp()
     {
-        List<Unit> combatants = battleSystem.combatants;
-        for (int ii = 0; ii < combatants.Count; ii++)
+        buttonToUnit = new Dictionary<Button, Unit>();
+        for (int ii = 0; ii < battleSystem.combatants.Count; ii++)
         {
             GameObject obj = unitPanels[ii];
             GameObject stats = obj.transform.GetChild(0).gameObject;
@@ -39,7 +40,8 @@ public class GUILayer : MonoBehaviour
             Color tempColor = img.color;
             tempColor.a = 1f;
             img.color = tempColor;
-            img.sprite = combatants[ii].baseUnit.image;
+            img.sprite = battleSystem.combatants[ii].baseUnit.image;
+            buttonToUnit.Add(button.GetComponent<Button>(), battleSystem.combatants[ii]);
         }
     }
 
@@ -213,5 +215,10 @@ public class GUILayer : MonoBehaviour
     public void ToggleResetButton(bool toggle)
     {
         resetButton.gameObject.SetActive(toggle);
+    }
+
+    public void Target(Button button)
+    {
+        battleSystem.PlayerAttack(buttonToUnit[button]);
     }
 }

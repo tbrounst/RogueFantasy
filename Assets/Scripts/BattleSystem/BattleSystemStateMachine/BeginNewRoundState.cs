@@ -9,7 +9,7 @@ public class BeginNewRoundState : BattleStateClass
 
     }
 
-    public override void Start()
+    public override void Begin()
     {
         BattleSystem.combatants = new List<Unit>();
         BattleSystem.combatants.AddRange(BattleSystem.playerParty.partyMembers);
@@ -17,7 +17,7 @@ public class BeginNewRoundState : BattleStateClass
 
         foreach (Unit unit in BattleSystem.playerParty.partyMembers)
         {
-            unit.unitStats.ResetAllStats();
+            unit.ResetAllStats();
         }
 
         foreach (Unit unit in BattleSystem.enemyParty.partyMembers)

@@ -4,9 +4,13 @@
     {
     }
 
-    public override void Start()
+    public override void Begin()
     {
-        BattleSystem.InitializeParty(BattleSystem.aus.allPlayerUnits, BattleSystem.playerParty);
+        //BattleSystem.InitializeParty(BattleSystem.aus.allPlayerUnits, BattleSystem.playerParty);
+        foreach(Unit unit in BattleSystem.playerParty.partyMembers)
+        {
+            unit.InitializeStats();
+        }
 
         if (BattleSystem.playerLevels == -1)
         {
@@ -37,6 +41,6 @@
 
     public override void ChangeState()
     {
-        BattleSystem.SetState(new InitializeBattleState(BattleSystem));
+        BattleSystem.SetState(new BeginNewRoundState(BattleSystem));
     }
 }

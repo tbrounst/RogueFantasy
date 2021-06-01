@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Unit/RegUnit")]
@@ -24,5 +25,18 @@ public class UnitBase : ScriptableObject
         }
         total += randomStats;
         return total;
+    }
+
+    override
+    public string ToString()
+    {
+        StringBuilder sb = new StringBuilder(nameOfUnit + "\n");
+        foreach (int ii in System.Enum.GetValues(typeof(StatsEnum)))
+        {
+            sb.Append($"{System.Enum.GetName(typeof(StatsEnum), ii)}: {stats[ii]}\n");
+        }
+        sb.Append($"Random stats: {randomStats}\n");
+        sb.Append($"Total stats: {GetTotalStats()}");
+        return sb.ToString();
     }
 }

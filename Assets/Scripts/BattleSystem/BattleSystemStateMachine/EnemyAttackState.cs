@@ -7,7 +7,7 @@ internal class EnemyAttackState : BattleStateClass
     {
     }
 
-    public override void Start()
+    public override void Begin()
     {
         int moveToUseInt = Random.Range(0, BattleSystem.activeUnit.currentAbilities.Count);
         Ability moveToUse = BattleSystem.activeUnit.currentAbilities[moveToUseInt];

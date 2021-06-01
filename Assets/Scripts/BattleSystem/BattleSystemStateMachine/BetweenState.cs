@@ -8,7 +8,7 @@ internal class BetweenState : BattleStateClass
 
     }
 
-    public override void Start()
+    public override void Begin()
     {
         ChangeState();
     }
