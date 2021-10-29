@@ -32,7 +32,6 @@ public class StartScreenGUI : MonoBehaviour
             Unit unit = startScreen.allUnitChoices[ii];
             Button button = characterButtons[ii];
             button.gameObject.SetActive(true);
-            Debug.Log(button);
             buttonToUnit[button] = unit;
             Image img = button.GetComponent<Image>();
             Color tempColor = img.color;
@@ -67,5 +66,12 @@ public class StartScreenGUI : MonoBehaviour
     {
         unitStats.gameObject.SetActive(false);
         statDescriptions.gameObject.SetActive(true);
+    }
+
+    public void CatchLevelUpEvent()
+    {
+        startScreen.globalLevel = startScreen.playerController.level;
+        startScreen.cash = startScreen.playerController.cash;
+        UpdateLevelText();
     }
 }

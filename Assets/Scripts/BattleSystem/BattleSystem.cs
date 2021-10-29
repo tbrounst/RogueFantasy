@@ -300,7 +300,7 @@ public class BattleSystem : StateMachine
 
     public void ThrowResetEvent()
     {
-        ResetEvent.Invoke(round);
+        ResetEvent.Invoke(round - enemyLevels);
     }
 
     public void UpdateStatBlocks()

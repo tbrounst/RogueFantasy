@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Scripts;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -13,16 +14,23 @@ public class StartScreenLogic : MonoBehaviour
     public int numUnitChoices;
     public int cash;
     public int cost;
+
+    public PlayerController playerController;
+    [HideInInspector]
     public int globalLevel;
 
     public AllPossibleUnits apu;
 
     [SerializeField] public UnityEvent StartScreenStartEvent;
-    [SerializeField] public UnityEvent LevelUpEvent;
+    [SerializeField] public AttemptLevelUpEvent AttemptLevelUpEvent;
     [SerializeField] public SetupFinishEvent SetupFinishEvent;
+    //[SerializeField] public UnityEvent UpdateLevelUpEvent;
 
     public void Start()
     {
+        globalLevel = playerController.level;
+        cash = playerController.cash;
+        MakeAllUnits();
         ResetParty();
         StartScreenStartEvent.Invoke();
     }
@@ -38,6 +46,33 @@ public class StartScreenLogic : MonoBehaviour
     //    }
     //    InitializeChoices(apu.allPlayerUnits);
     //}
+
+    private void MakeAllUnits()
+    {
+        if (allUnitChoices.Count == 0)
+        {
+            for (int ii = 0; ii < numUnitChoices; ii++)
+            {
+                Unit unit = this.gameObject.AddComponent(typeof(Unit)) as Unit;
+                allUnitChoices.Add(unit);
+            }
+        }
+        List<UnitBase> unitBases = apu.GetListOfUnits(numUnitChoices);
+        for (int ii = 0; ii < numUnitChoices; ii++)
+        {
+            allUnitChoices[ii].baseUnit = unitBases[ii];
+        }
+
+        //List<Unit> unitsRandomized = new List<Unit>();
+        //foreach (UnitBase unitBase in apu.allPlayerUnits)
+        //{
+        //    Unit unit = this.gameObject.AddComponent(typeof(Unit)) as Unit;
+        //    unit.baseUnit = unitBase;
+        //    unitsRandomized.Add(unit);
+        //}
+        //Utils.Shuffle<Unit>(unitsRandomized);
+        //allUnitChoices = unitsRandomized.GetRange(0, numUnitChoices);
+    }
 
     public void ResetParty()
     {
@@ -66,12 +101,7 @@ public class StartScreenLogic : MonoBehaviour
 
     public void IncreaseGlobalLevel()
     {
-        if (cash >= cost)
-        {
-            cash -= cost;
-            globalLevel++;
-        }
-        LevelUpEvent.Invoke();
+        AttemptLevelUpEvent.Invoke(cost);
     }
 
     public void AddUnitToParty(Unit unit)
@@ -97,6 +127,12 @@ public class StartScreenLogic : MonoBehaviour
 
 [System.Serializable]
 public class SetupFinishEvent : UnityEvent<List<Unit>, int>
+{
+
+}
+
+[System.Serializable]
+public class AttemptLevelUpEvent : UnityEvent<int>
 {
 
 }
