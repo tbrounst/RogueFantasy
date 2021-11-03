@@ -97,6 +97,7 @@ public class StartScreenLogic : MonoBehaviour
             unit.level = globalLevel;
             unit.InitializeStats();
         }
+        playerController.unitParty.partyMembers = party;
         SetupFinishEvent.Invoke(party, globalLevel);
     }
 }

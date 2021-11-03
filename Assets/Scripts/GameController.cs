@@ -24,7 +24,7 @@ public class GameController : MonoBehaviour
 
     public void SwitchToBattle(List<Unit> party, int level)
     {
-        battleSystem.playerContoller.unitParty.partyMembers = party;
+        //battleSystem.playerContoller.unitParty.partyMembers = party;
         battleSystem.playerLevels = level;
         startScreen.gameObject.SetActive(false);
         battleSystem.gameObject.SetActive(true);
