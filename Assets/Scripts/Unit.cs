@@ -11,10 +11,21 @@ public class Unit : MonoBehaviour
 
     public List<Ability> currentAbilities = new List<Ability>(4);
 
+    public void Initialize(int level)
+    {
+        baseUnit = AllPossibleUnits.GetOneUnit();
+        Initialize(baseUnit, level)
+;    }
+
     public void Initialize(List<UnitBase> possibleUnits, int level)
     {
         int index = Random.Range(0, possibleUnits.Count);
-        baseUnit = possibleUnits[index];
+        Initialize(possibleUnits[index], level);
+    }
+
+    public void Initialize(UnitBase unitBase, int level)
+    {
+        baseUnit = unitBase;
         this.level = level;
         InitializeStats();
     }

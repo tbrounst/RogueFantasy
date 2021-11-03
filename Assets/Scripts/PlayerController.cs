@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : UnitController
 {
-
-    public Party playerParty;
     public int cash;
     public int level;
 

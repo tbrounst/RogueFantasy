@@ -19,12 +19,9 @@ public class StartScreenLogic : MonoBehaviour
     [HideInInspector]
     public int globalLevel;
 
-    public AllPossibleUnits apu;
-
     [SerializeField] public UnityEvent StartScreenStartEvent;
     [SerializeField] public AttemptLevelUpEvent AttemptLevelUpEvent;
     [SerializeField] public SetupFinishEvent SetupFinishEvent;
-    //[SerializeField] public UnityEvent UpdateLevelUpEvent;
 
     public void Start()
     {
@@ -35,17 +32,6 @@ public class StartScreenLogic : MonoBehaviour
         StartScreenStartEvent.Invoke();
     }
 
-    //public void Setup(List<UnitBase> allPossibleUnits)
-    //public void Setup()
-    //{
-    //    ResetParty();
-    //    allUnitChoices = new List<Unit>(partySize);
-    //    if (allUnitChoices.Count == 0)
-    //    {
-    //        InitializeChoicesList();
-    //    }
-    //    InitializeChoices(apu.allPlayerUnits);
-    //}
 
     private void MakeAllUnits()
     {
@@ -57,21 +43,11 @@ public class StartScreenLogic : MonoBehaviour
                 allUnitChoices.Add(unit);
             }
         }
-        List<UnitBase> unitBases = apu.GetListOfUnits(numUnitChoices);
+        List<UnitBase> unitBases = AllPossibleUnits.GetListOfUnits(numUnitChoices);
         for (int ii = 0; ii < numUnitChoices; ii++)
         {
             allUnitChoices[ii].baseUnit = unitBases[ii];
         }
-
-        //List<Unit> unitsRandomized = new List<Unit>();
-        //foreach (UnitBase unitBase in apu.allPlayerUnits)
-        //{
-        //    Unit unit = this.gameObject.AddComponent(typeof(Unit)) as Unit;
-        //    unit.baseUnit = unitBase;
-        //    unitsRandomized.Add(unit);
-        //}
-        //Utils.Shuffle<Unit>(unitsRandomized);
-        //allUnitChoices = unitsRandomized.GetRange(0, numUnitChoices);
     }
 
     public void ResetParty()

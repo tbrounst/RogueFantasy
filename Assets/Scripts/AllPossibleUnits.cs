@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class AllPossibleUnits : MonoBehaviour
 {
-    public List<UnitBase> allPlayerUnits;
+    public static List<UnitBase> allPlayerUnits;
     //public List<UnitBase> allEnemyUnits;
+    public List<UnitBase> allUnitsSetter;
 
-    public UnitBase GetOneUnit()
+    public void Awake()
+    {
+        allPlayerUnits = allUnitsSetter;
+    }
+
+    public static UnitBase GetOneUnit()
     {
         int k = Random.Range(0, allPlayerUnits.Count);
         return allPlayerUnits[k];
     }
 
-    public List<UnitBase> GetListOfUnits(int num)
+    public static List<UnitBase> GetListOfUnits(int num)
     {
         List<UnitBase> output = new List<UnitBase>();
         for (int ii = 0; ii < num; ii++)

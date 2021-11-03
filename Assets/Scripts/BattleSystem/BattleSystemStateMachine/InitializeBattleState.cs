@@ -7,18 +7,19 @@
     public override void Begin()
     {
         //BattleSystem.InitializeParty(BattleSystem.aus.allPlayerUnits, BattleSystem.playerParty);
-        foreach(Unit unit in BattleSystem.playerParty.partyMembers)
+        foreach(Unit unit in BattleSystem.playerContoller.GetUnits())
         {
             unit.InitializeStats();
         }
 
+        //TODO double check all this logic and clean up
         if (BattleSystem.playerLevels == -1)
         {
-            BattleSystem.playerLevels = BattleSystem.playerParty.GetPartyMemeber(0).level;
+            BattleSystem.playerLevels = BattleSystem.playerContoller.unitParty.GetPartyMemeber(0).level;
         }
         else
         {
-            foreach (Unit unit in BattleSystem.playerParty.partyMembers)
+            foreach (Unit unit in BattleSystem.playerContoller.GetUnits())
             {
                 unit.level = BattleSystem.playerLevels;
             }
@@ -26,11 +27,11 @@
 
         if (BattleSystem.enemyLevels == -1)
         {
-            BattleSystem.enemyLevels = BattleSystem.enemyParty.GetPartyMemeber(0).level;
+            BattleSystem.enemyLevels = BattleSystem.enemyController.unitParty.GetPartyMemeber(0).level;
         }
         else
         {
-            foreach (Unit unit in BattleSystem.enemyParty.partyMembers)
+            foreach (Unit unit in BattleSystem.enemyController.GetUnits())
             {
                 unit.level = BattleSystem.enemyLevels;
             }

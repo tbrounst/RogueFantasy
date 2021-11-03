@@ -87,7 +87,7 @@ public class BattleSystemGUILayer : MonoBehaviour
         GameObject button = unitPanels[unitIndex].transform.GetChild(1).gameObject;
 
         var sequence = DOTween.Sequence();
-        if (battleSystem.playerParty.InParty(unit))
+        if (battleSystem.playerContoller.unitParty.InParty(unit))
         {
             sequence.Append(button.transform.DOLocalMoveX(button.transform.localPosition.x + 50f, .2f));
         } else

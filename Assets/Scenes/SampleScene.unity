@@ -1810,7 +1810,6 @@ MonoBehaviour:
   cost: 2
   playerController: {fileID: 1790959707}
   globalLevel: 1
-  apu: {fileID: 1315396483}
   StartScreenStartEvent:
     m_PersistentCalls:
       m_Calls:
@@ -3667,23 +3666,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99fb0b8ab30939f4dac0ed9b497a8048, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allPlayerUnits:
-  - {fileID: 11400000, guid: 0fcf97ccc351e3b43949f5c836d79db2, type: 2}
-  - {fileID: 11400000, guid: d786ed223d8865e43bef41bea2702239, type: 2}
-  - {fileID: 11400000, guid: 1520f81a3d014ae4c8f9ced4f451484b, type: 2}
-  - {fileID: 11400000, guid: 4b4ece62342c1dd46b3b4ee63bbc4789, type: 2}
-  - {fileID: 11400000, guid: 077bdfc3a8406ce40a49289fc7065f9e, type: 2}
-  - {fileID: 11400000, guid: 4fdde5acbb75c714999c8817e039fc91, type: 2}
-  - {fileID: 11400000, guid: ebd71adfa375c304cb9d5156a320e43d, type: 2}
-  - {fileID: 11400000, guid: eafb4b71e2c80dd4cb893a883d64de80, type: 2}
-  - {fileID: 11400000, guid: 62887c428527d7a44b14efda4ee54f22, type: 2}
+  allUnitsSetter:
   - {fileID: 11400000, guid: 9af61831e219a6d4885ebe4305c68076, type: 2}
   - {fileID: 11400000, guid: 1621648ece2bd404fb7d5ee0cd3c1435, type: 2}
-  - {fileID: 11400000, guid: 584ed631122f473418050009e108b664, type: 2}
-  allEnemyUnits:
   - {fileID: 11400000, guid: 077bdfc3a8406ce40a49289fc7065f9e, type: 2}
+  - {fileID: 11400000, guid: d786ed223d8865e43bef41bea2702239, type: 2}
+  - {fileID: 11400000, guid: 62887c428527d7a44b14efda4ee54f22, type: 2}
   - {fileID: 11400000, guid: 4fdde5acbb75c714999c8817e039fc91, type: 2}
+  - {fileID: 11400000, guid: 4b4ece62342c1dd46b3b4ee63bbc4789, type: 2}
+  - {fileID: 11400000, guid: 0fcf97ccc351e3b43949f5c836d79db2, type: 2}
+  - {fileID: 11400000, guid: 584ed631122f473418050009e108b664, type: 2}
+  - {fileID: 11400000, guid: 1520f81a3d014ae4c8f9ced4f451484b, type: 2}
+  - {fileID: 11400000, guid: fe19738f13910194d872d0f1666d3402, type: 2}
   - {fileID: 11400000, guid: ebd71adfa375c304cb9d5156a320e43d, type: 2}
+  - {fileID: 11400000, guid: eafb4b71e2c80dd4cb893a883d64de80, type: 2}
 --- !u!4 &1315396484
 Transform:
   m_ObjectHideFlags: 0
@@ -5247,7 +5243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25a0f51e30041df4493f4afae4ecf927, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerParty:
+  unitParty:
     partyMembers: []
   cash: 10
   level: 1
@@ -5389,14 +5385,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aus: {fileID: 1315396483}
-  playerParty:
-    partyMembers:
-    - {fileID: 1948170194}
-    - {fileID: 1491483402}
-  enemyParty:
-    partyMembers:
-    - {fileID: 2134534933}
-    - {fileID: 2005632612}
+  playerContoller: {fileID: 0}
+  enemyController: {fileID: 0}
   combatants: []
   activeUnit: {fileID: 0}
   queuedAttack: {fileID: 0}
@@ -6527,9 +6517,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   battleSystem: {fileID: 1921533833}
   startScreen: {fileID: 777462525}
-  numUnitChoices: 6
-  apu: {fileID: 1315396483}
-  playerController: {fileID: 1790959707}
 --- !u!4 &2092700073
 Transform:
   m_ObjectHideFlags: 0

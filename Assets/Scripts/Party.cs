@@ -5,7 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public class Party
 {
-    
     public List<Unit> partyMembers;
 
     public Party(List<Unit> partyMembers)

@@ -12,28 +12,25 @@ public class BeginNewRoundState : BattleStateClass
     public override void Begin()
     {
         BattleSystem.combatants = new List<Unit>();
-        BattleSystem.combatants.AddRange(BattleSystem.playerParty.partyMembers);
-        BattleSystem.combatants.AddRange(BattleSystem.enemyParty.partyMembers);
+        BattleSystem.combatants.AddRange(BattleSystem.playerContoller.GetUnits());
+        BattleSystem.combatants.AddRange(BattleSystem.enemyController.GetUnits());
 
-        foreach (Unit unit in BattleSystem.playerParty.partyMembers)
+        foreach (Unit unit in BattleSystem.playerContoller.GetUnits())
         {
             unit.ResetAllStats();
         }
 
-        foreach (Unit unit in BattleSystem.enemyParty.partyMembers)
+        foreach (Unit unit in BattleSystem.enemyController.GetUnits())
         {
             unit.level++;
         }
 
-        BattleSystem.InitializeParty(BattleSystem.aus.allPlayerUnits, BattleSystem.enemyParty);
+        BattleSystem.InitializeParty(AllPossibleUnits.allPlayerUnits, BattleSystem.enemyController.unitParty);
 
-        BattleSystem.activeUnit = BattleSystem.playerParty.GetPartyMemeber(0);
+        BattleSystem.activeUnit = BattleSystem.playerContoller.unitParty.GetPartyMemeber(0);
         BattleSystem.battleTimer = new BattleTimer(BattleSystem.combatants);
 
         BattleSystem.StartBattleEvent.Invoke();
-        //guiLayer.SetUp(combatants);
-        //guiLayer.SetRoundText(round);
-        //guiLayer.ToggleResetButton(false);
         BattleSystem.UpdateStatBlocks();
 
         ChangeState();

@@ -6,40 +6,17 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     private enum State { START_SCREEN, BATTLE_SCREEN};
-    //private State currentState = State.START_SCREEN;
 
     public BattleSystem battleSystem;
     public StartScreenLogic startScreen;
 
-    //public int numUnitChoices;
-    //public AllPossibleUnits apu;
-    //private List<Unit> unitsRandomized;
-
-    //public PlayerController playerController;
-
     public void Awake()
     {
-        //MakeAllUnits();
         SwitchToStart();
     }
 
-    //TODO: add to start screen logic
-    //private void MakeAllUnits()
-    //{
-    //    unitsRandomized = new List<Unit>();
-    //    foreach(UnitBase unitBase in apu.allPlayerUnits) {
-    //        Unit unit = this.gameObject.AddComponent(typeof(Unit)) as Unit;
-    //        unit.baseUnit = unitBase;
-    //        unitsRandomized.Add(unit);
-    //    }
-    //}
-
     public void SwitchToStart()
     {
-        //Utils.Shuffle<Unit>(unitsRandomized);
-        //startScreen.allUnitChoices = unitsRandomized.GetRange(0, numUnitChoices);
-        //startScreen.globalLevel = globalLevel;
-        //startScreen.cash = cash;
         battleSystem.gameObject.SetActive(false);
         startScreen.gameObject.SetActive(true);
         startScreen.Start();
@@ -47,7 +24,7 @@ public class GameController : MonoBehaviour
 
     public void SwitchToBattle(List<Unit> party, int level)
     {
-        battleSystem.playerParty.partyMembers = party;
+        battleSystem.playerContoller.unitParty.partyMembers = party;
         battleSystem.playerLevels = level;
         startScreen.gameObject.SetActive(false);
         battleSystem.gameObject.SetActive(true);

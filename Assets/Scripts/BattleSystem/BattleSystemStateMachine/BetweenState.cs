@@ -15,11 +15,11 @@ internal class BetweenState : BattleStateClass
 
     public override void ChangeState()
     {
-        if (BattleSystem.playerParty.IsPartyDefeated())
+        if (BattleSystem.playerContoller.unitParty.IsPartyDefeated())
         {
             BattleSystem.SetState(new PlayerLoseState(BattleSystem));
         }
-        else if (BattleSystem.enemyParty.IsPartyDefeated())
+        else if (BattleSystem.enemyController.unitParty.IsPartyDefeated())
         {
             Debug.Log("Enemy is dead");
             BattleSystem.SetState(new PlayerWinState(BattleSystem));
@@ -27,7 +27,7 @@ internal class BetweenState : BattleStateClass
         {
             BattleSystem.activeUnit = BattleSystem.battleTimer.NextToGo();
             BattleSystem.UpdateStatBlocks();
-            if (BattleSystem.enemyParty.InParty(BattleSystem.activeUnit))
+            if (BattleSystem.enemyController.unitParty.InParty(BattleSystem.activeUnit))
             {
                 BattleSystem.SetState(new EnemyAttackState(BattleSystem));
             }
@@ -35,9 +35,6 @@ internal class BetweenState : BattleStateClass
             {
                 BattleSystem.StartPlayerTurnEvent.Invoke();
                 BattleSystem.SetState(new PlayerAttackState(BattleSystem));
-
-                //guiLayer.EnableAttackButtons(true);
-                //guiLayer.UpdateGameDescriptionWithoutTyping("Select an attack");
             }
         } 
     }

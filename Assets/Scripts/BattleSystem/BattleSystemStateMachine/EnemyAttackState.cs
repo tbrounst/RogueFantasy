@@ -15,14 +15,14 @@ internal class EnemyAttackState : BattleStateClass
         int enemyTarget = 0;
         if (moveToUse.requiresTarget)
         {
-            enemyTarget = Random.Range(0, BattleSystem.playerParty.PartySize());
-            while (BattleSystem.playerParty.GetPartyMemeber(enemyTarget).IsDead())
+            enemyTarget = Random.Range(0, BattleSystem.playerContoller.unitParty.PartySize());
+            while (BattleSystem.playerContoller.unitParty.GetPartyMemeber(enemyTarget).IsDead())
             {
-                enemyTarget = Random.Range(0, BattleSystem.playerParty.PartySize());
+                enemyTarget = Random.Range(0, BattleSystem.playerContoller.unitParty.PartySize());
             }
         }
 
-        BattleSystem.PerformAttack(moveToUse, BattleSystem.activeUnit, BattleSystem.playerParty.GetPartyMemeber(enemyTarget));
+        BattleSystem.PerformAttack(moveToUse, BattleSystem.activeUnit, BattleSystem.playerContoller.unitParty.GetPartyMemeber(enemyTarget));
         ChangeState();
     }
 
